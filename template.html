@@ -6,7 +6,13 @@
 
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=10,IE=9,IE=8">
-
+	<link rel="manifest" href="manifest.json"></link>
+	<script src="manup.js"></script>
+	<script type="module">
+		import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
+		const el = document.createElement('pwa-update');
+		document.body.appendChild(el);
+	</script>
 	<title>[TITLE]</title>
 	
 	<style type="text/css">
@@ -834,33 +840,12 @@
 					var file_tmp = sTmp[0];
 					var dir_tmp = getDirNameAndPath(SelectedFolderID).substring(source_root.length);
 					if( dir_tmp != "" ) dir_tmp += "/";
-					if( [LINK FILES] )
-					{
-						file_tmp = link_protocol + link_root + dir_tmp + sTmp[0] + "\">" + sTmp[0] + "</a>";
-						if( navigator.userAgent.toLowerCase().indexOf("msie") >= 0  &&  link_protocol.indexOf("file:") >= 0 )
-						{
-							file_tmp = "javascript:alert('Internet Explorer does not allow linking to local files...')" + "\">" + sTmp[0] + "</a>";
-						}
-						if( file_tmp.substr(0,1) === "/" ) file_tmp = file_tmp.substr(1);
-						file_tmp = file_tmp.replace(/\\/g,"/");
-						file_tmp = file_tmp.replace(/#/g,"%23");
-
-						var indx = file_tmp.indexOf("://");
-						if( indx != -1 )
-						{
-							var protocol_tmp = file_tmp.substr(0,indx+3);
-							file_tmp = file_tmp.substr(indx+3);
-							file_tmp = file_tmp.replace(/\/\//g,"/");
-							file_tmp = protocol_tmp + file_tmp;
-						}
-						else
-						{
-							file_tmp = file_tmp.replace(/\/\//g,"/");
-						}
-
-						file_tmp = "<a href=\"" + file_tmp;
+					var temp = dir_tmp.split("\\");
+					var indexlink = "";
+					for( var u=3; u<temp.length; u++){
+						indexlink = indexlink + temp[u] + "/";
 					}
-					table_html += "<tr><td><span class='file'>" + file_tmp + "</span></td><td>" + bytesToSize( sTmp[1] ) + "</td><td>" + sTmp[2] + "</td></tr>\n";
+					table_html += "<tr><td><span class='file'><a href=\'https:\/\/player.adityashri.tk\/"+ indexlink + sTmp[0] + "'>"+ sTmp[0] + "</a></span></td><td>" + bytesToSize( sTmp[1] ) + "</td><td>" + sTmp[2] + "</td></tr>\n";
 				}
 
 				table_html += "</tbody></table>\n";
