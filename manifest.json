@@ -3,11 +3,11 @@
     "background_color": "#000000",
     "display": "standalone",
     "scope": "/",
-    "start_url": "index.html",
+    "start_url": "https://gdlinks.adityashri.tk",
     "app_name": "Index Links",
     "short_name": "Index Links",
     "description": "Indexes Drive Links",
-	"orientation": "landscape-primary",
+    "orientation": "landscape-primary",
     "icons": [
         {
             "src": "/icon-192x192.png",
